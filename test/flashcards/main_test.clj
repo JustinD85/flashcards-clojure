@@ -4,6 +4,7 @@
 
 (def card_1 (card "what is?" "nothing is" :facts))
 (def turn_1 (turn "nothing is" card_1))
+(def turn_2 (turn "something is" card_1))
 
 (deftest card-test
   (testing "A new card can be created"
@@ -14,8 +15,14 @@
       (is (= (:category card_1) (:category expected))))))
 
 (deftest turn-test
-  (testing "A turn can hold a card and have some derived values"
+  (testing "A turn can hold a card and returns response for a correct guess"
     (is (= (:card turn_1) card_1))
     (is (= (:guess turn_1) "nothing is"))
     (is (= (:correct? turn_1) true))
-    (is (= (:feedback turn_1) "Correct!"))))
+    (is (= (:feedback turn_1) "Correct!")))
+
+  (testing "A turn can hold a card and returns response for an incorrect guess"
+    (is (= (:card turn_2) card_1))
+    (is (= (:guess turn_2) "something is"))
+    (is (= (:correct? turn_2) false)
+    (is (= (:feedback turn_2) "Incorrect.")))))
