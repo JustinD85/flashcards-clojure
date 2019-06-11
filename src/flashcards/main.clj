@@ -1,9 +1,14 @@
 (ns flashcards.main
   (:gen-class))
 
-(defn new-card [question answer category]
+(defn card [question answer category]
   {:question question :answer answer :category category})
 
+(defn turn [guess card]
+  {:card card
+   :guess guess
+   :correct? (= guess (:answer card))
+   :feedback "Correct!"})
 
 (defn -main
   "I don't do a whole lot ... yet."
