@@ -28,4 +28,8 @@
      :deck (fn [] deck)
      :turns (fn [] @turns)
      :current-card (fn []
-                     (first ((:cards deck))))}))
+                     (first ((:cards deck))))
+     :take-turn (fn [guess]
+                  (let [new-turn (turn guess (first ((:cards deck))))]
+                    (swap! turns #(conj % new-turn))
+                    new-turn))}))
