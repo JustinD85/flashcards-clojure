@@ -1,19 +1,7 @@
 (ns flashcards.main-test
   (:require [clojure.test :refer :all]
-            [flashcards.main :refer :all]))
-
-(def card_1 (card "what is?" "nothing is" :facts))
-(def card_2 (card "to be" "or not to be" :poetry))
-(def card_3 (card "what is the best temp?" "summer" :life))
-(def card_4 (card "what is the worst temp?" "winter" :life))
-
-(def cards [card_1 card_2 card_3 card_4])
-
-(def turn_1 (turn "nothing is" card_1))
-(def turn_2 (turn "something is" card_1))
-
-(def deck_1 (deck cards))
-
+            [flashcards.main :refer :all]
+            [flashcards.data :refer :all]))
 (deftest card-test
   (testing "A new card can be created"
     (let [expected {:question "what is?" :answer "nothing is" :category :facts}]
@@ -40,3 +28,9 @@
     (is (= (:cards deck_1) cards))
     (is (= (:count deck_1) 4))
     (is (= ((:cards_in_category deck_1) :life) [card_3 card_4]))))
+
+(deftest round-test
+  (testing "A Round can take in a deck and has some functionality"
+    (is (= deck_1 (:deck round_1)))
+    (is (= [] (:turns round_1)))
+    (is (= card_1 (:current_card round_1)))))
