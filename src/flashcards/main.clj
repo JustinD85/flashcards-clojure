@@ -14,6 +14,10 @@
 (defn deck [cards]
   {:cards cards
    :count (count cards)
-   :cards_in_category (fn [word]
-                        (filter (fn [card]
-                                  (= (:category card) word)) cards))})
+   :cards_in_category #(with-category cards %)})
+
+;;private
+
+(defn with-category [cards word]
+  (filter #(= (:category %) word) cards))
+
