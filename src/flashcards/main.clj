@@ -9,7 +9,10 @@
     {:card card
      :guess guess
      :correct? correct?
-     :feedback (if correct? "Correct!" "Incorrect.")}))
+     :feedback (if correct? "Correct!" "Incorrect.")
+     :in-category? #(= (:category card) %)
+     :correct-in-category #(when (= % (:category card)) correct?)
+     }))
 
 (defn deck [cards]
   (let [cards (atom cards)]
@@ -24,7 +27,12 @@
 
 (defn round [deck-with-cards]
   (let [turns (atom []) deck deck-with-cards
-        number-correct (fn [](count (filter #(:correct? %) @turns)))]
+        number-correct (fn [] (count (filter #(:correct? %) @turns)))
+        number-correct-by-category (fn [category]
+                                     (count
+                                      (filter
+                                       #((:correct-in-category %) category)
+                                       @turns)))]
     {
      :deck (fn [] deck)
      :turns (fn [] @turns)
@@ -36,8 +44,8 @@
                     ((:remove-card deck))
                     new-turn))
      :number-correct number-correct
-     :number-correct-by-category (fn [category]
-                                   (count
-                                    (filter #(when (= category (:category (:card %))) (:correct? %))
-                                            @turns)))
-     :percent-correct (fn [] (/ (* 100 (float (number-correct)))  (count @turns)))}))
+     :number-correct-by-category number-correct-by-category
+     :percent-correct (fn [] (/ (* 100 (float (number-correct)))  (count @turns)))
+     :percent-correct-by-category (fn [category]
+                                    (/ (* 100 (float (number-correct-by-category category)))
+                                       (count (filter #((:in-category? %) :facts) @turns))))}))
