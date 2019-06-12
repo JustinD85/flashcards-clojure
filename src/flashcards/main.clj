@@ -6,12 +6,14 @@
 
 (defn turn [guess card]
   (let [correct? (= guess (:answer card))]
-  {:card card
-   :guess guess
-   :correct? correct?
-   :feedback (if correct? "Correct!" "Incorrect.")}))
+    {:card card
+     :guess guess
+     :correct? correct?
+     :feedback (if correct? "Correct!" "Incorrect.")}))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+(defn deck [cards]
+  {:cards cards
+   :count (count cards)
+   :cards_in_category (fn [word]
+                        (filter (fn [card]
+                                  (= (:category card) word)) cards))})
