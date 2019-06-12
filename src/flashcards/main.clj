@@ -35,4 +35,7 @@
                     ((:remove-card deck))
                     new-turn))
      :number-correct (fn []
-                       (count (filter #(:correct? %) @turns)))}))
+                       (count (filter #(:correct? %) @turns)))
+     :number-correct-by-category (fn [category]
+                                   (count (filter #(when (=  category (:category (:card %)))
+                                                      (:correct? %)) @turns)))}))
