@@ -1,18 +1,16 @@
 (ns flashcards.data
   (:require [flashcards.main :refer :all]))
 
+(def card-1 (card "what is?" "nothing is" :facts))
+(def card-2 (card "to be" "or not to be" :poetry))
+(def card-3 (card "what is the best temp?" "summer" :life))
+(def card-4 (card "what is the worst temp?" "winter" :life))
 
-(def card_1 (card "what is?" "nothing is" :facts))
-(def card_2 (card "to be" "or not to be" :poetry))
-(def card_3 (card "what is the best temp?" "summer" :life))
-(def card_4 (card "what is the worst temp?" "winter" :life))
+(def cards [card-1 card-2 card-3 card-4])
 
-(def cards [card_1 card_2 card_3 card_4])
+(def turn-1 (turn "nothing is" card-1))
+(def turn-2 (turn "something is" card-1))
 
-(def turn_1 (turn "nothing is" card_1))
-(def turn_2 (turn "something is" card_1))
+(def deck-1 (deck cards))
 
-(def deck_1 (deck cards))
-
-(def round_1 (round deck_1))
-
+(def round-1 (round deck-1))
