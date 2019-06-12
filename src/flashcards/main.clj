@@ -32,6 +32,7 @@
      :take-turn (fn [guess]
                   (let [new-turn (turn guess (first ((:cards deck))))]
                     (swap! turns #(conj % new-turn))
+                    ((:remove-card deck))
                     new-turn))
      :number-correct (fn []
                        (count (filter #(:correct? %) @turns)))}))
