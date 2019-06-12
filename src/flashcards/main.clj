@@ -14,10 +14,12 @@
 (defn deck [cards]
   {:cards cards
    :count (count cards)
-   :cards_in_category #(with-category cards %)})
+   :cards_in_category  (fn [word]
+                         (filter #(= (:category %) word) cards))})
 
-;;private
 
-(defn with-category [cards word]
-  (filter #(= (:category %) word) cards))
-
+(defn round [deck-with-cards]
+  (let [turns [] deck deck-with-cards]
+    {:deck deck
+     :turns turns
+     :current_card (first (:cards deck))}))
