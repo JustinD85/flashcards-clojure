@@ -23,7 +23,8 @@
                            (filter #(= (:category %) word) @cards))}))
 
 (defn round [deck-with-cards]
-  (let [turns (atom []) deck deck-with-cards]
+  (let [turns (atom []) deck deck-with-cards
+        number-correct (fn [](count (filter #(:correct? %) @turns)))]
     {
      :deck (fn [] deck)
      :turns (fn [] @turns)
@@ -34,8 +35,9 @@
                     (swap! turns #(conj % new-turn))
                     ((:remove-card deck))
                     new-turn))
-     :number-correct (fn []
-                       (count (filter #(:correct? %) @turns)))
+     :number-correct number-correct
      :number-correct-by-category (fn [category]
-                                   (count (filter #(when (=  category (:category (:card %)))
-                                                      (:correct? %)) @turns)))}))
+                                   (count
+                                    (filter #(when (= category (:category (:card %))) (:correct? %))
+                                            @turns)))
+     :percent-correct (fn [] (/ (* 100 (float (number-correct)))  (count @turns)))}))
