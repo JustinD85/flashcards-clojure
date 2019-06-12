@@ -54,7 +54,19 @@
       (is (= deck-1 ((:deck round-1))))
       (is (= [] ((:turns round-1))))
       (is (= card-1 ((:current-card round-1)))))
+
     (testing "A Round can take a turn"
       (let [turn ((:take-turn round-1) "nothing is")]
+
         (is (= turn (first ((:turns round-1)))))
-        (is (:correct? turn))))))
+        (is (:correct? turn))
+        (is (= [turn] ((:turns round-1))))
+        (is (= 1 (count ((:turns round-1)))))
+        (is (= "Correct!" (:feedback (last ((:turns round-1))))))
+        (is (= 1 ((:number-correct round-1))))
+        (is
+         ((:take-turn round-1) "Wolf")
+         (= 2 (count ((:turns round-1)))))
+        (is (= "Correct!" (:feedback (first ((:turns round-1))))))
+        (is (= "Incorrect." (:feedback (last ((:turns round-1))))))
+        ))))
