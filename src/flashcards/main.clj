@@ -12,14 +12,21 @@
      :feedback (if correct? "Correct!" "Incorrect.")}))
 
 (defn deck [cards]
-  {:cards cards
-   :count (count cards)
-   :cards_in_category  (fn [word]
-                         (filter #(= (:category %) word) cards))})
+  (let [cards (atom cards)]
+    {:cards  (fn [] @cards)
+     :count (fn [] (count @cards))
+     :remove-card (fn []
+                    (let [removed-card (first @cards)]
+                      (swap! cards #(rest %))
+                      removed-card))
+     :cards-in-category  (fn [word]
+                           (filter #(= (:category %) word) @cards))}))
 
 
 (defn round [deck-with-cards]
-  (let [turns [] deck deck-with-cards]
-    {:deck deck
-     :turns turns
-     :current_card (first (:cards deck))}))
+  (let [turns (atom []) deck deck-with-cards]
+    {
+     :deck (fn [] deck)
+     :turns (fn [] @turns)
+     :current-card (fn []
+                     (first ((:cards deck))))}))
