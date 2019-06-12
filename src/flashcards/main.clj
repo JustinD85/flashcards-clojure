@@ -22,7 +22,6 @@
      :cards-in-category  (fn [word]
                            (filter #(= (:category %) word) @cards))}))
 
-
 (defn round [deck-with-cards]
   (let [turns (atom []) deck deck-with-cards]
     {
