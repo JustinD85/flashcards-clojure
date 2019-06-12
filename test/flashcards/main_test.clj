@@ -20,22 +20,25 @@
   (testing "A new card can be created"
     (let [expected {:question "what is?" :answer "nothing is" :category :facts}]
       (is (=  card-1 expected))
-      (is (= (:question card-1) (:question expected)))
-      (is (= (:answer card-1) (:answer expected)))
-      (is (= (:category card-1) (:category expected))))))
+      (is (= "what is?" (:question card-1)))
+      (is (= "nothing is" (:answer card-1)))
+      (is (= :facts (:category card-1))))))
 
 (deftest turn-test
   (testing "A turn can hold a card and returns response for a correct guess"
     (is (= (:card turn-1) card-1))
     (is (= (:guess turn-1) "nothing is"))
     (is (= (:correct? turn-1) true))
-    (is (= (:feedback turn-1) "Correct!")))
+    (is (= (:feedback turn-1) "Correct!"))
+    (is ((:in-category? turn-1) :facts))
+    (not (= ((:in-category? turn-1) :not-facts)))
+    (is (= true ((:correct-in-category turn-1) :facts )))))
 
   (testing "A turn can hold a card and returns response for an incorrect guess"
     (is (= (:card turn-2) card-1))
     (is (= (:guess turn-2) "something is"))
     (is (= (:correct? turn-2) false)
-        (is (= (:feedback turn-2) "Incorrect.")))))
+        (is (= (:feedback turn-2) "Incorrect."))))
 
 (deftest deck-test
   (testing "Deck has all cards"
