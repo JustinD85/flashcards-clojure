@@ -3,8 +3,16 @@
             [flashcards.main :refer :all]))
 
 (def card_1 (card "what is?" "nothing is" :facts))
+(def card_2 (card "to be" "or not to be" :poetry))
+(def card_3 (card "what is the best temp?" "summer" :life))
+(def card_4 (card "what is the worst temp?" "winter" :life))
+
+(def cards [card_1 card_2 card_3 card_4])
+
 (def turn_1 (turn "nothing is" card_1))
 (def turn_2 (turn "something is" card_1))
+
+(def deck_1 (deck cards))
 
 (deftest card-test
   (testing "A new card can be created"
@@ -26,3 +34,9 @@
     (is (= (:guess turn_2) "something is"))
     (is (= (:correct? turn_2) false)
     (is (= (:feedback turn_2) "Incorrect.")))))
+
+(deftest deck-test
+  (testing "A deck has some default behaviour"
+    (is (= (:cards deck_1) cards))
+    (is (= (:count deck_1) 4))
+    (is (= ((:cards_in_category deck_1) :life) [card_3 card_4]))))
