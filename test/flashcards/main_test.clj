@@ -50,9 +50,11 @@
 
 (deftest round-test
   (let  [deck-1 (deck cards) round-1 (round deck-1)]
-  (testing "A Round can take in a deck and has some functionality"
-    (is (= deck-1 ((:deck round-1))))
-    (is (= [] ((:turns round-1))))
-    (is (= card-1 ((:current-card round-1)))))
-  (testing "A Round can take a turn"
-    (is (= 1 1)))))
+    (testing "A Round can take in a deck and has some functionality"
+      (is (= deck-1 ((:deck round-1))))
+      (is (= [] ((:turns round-1))))
+      (is (= card-1 ((:current-card round-1)))))
+    (testing "A Round can take a turn"
+      (let [turn ((:take-turn round-1) "nothing is")]
+        (is (= turn (first ((:turns round-1)))))
+        (is (:correct? turn))))))
