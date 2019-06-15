@@ -1,6 +1,14 @@
 [![Built with Spacemacs](https://cdn.rawgit.com/syl20bnr/spacemacs/442d025779da2f62fc86c2082703697714db6514/assets/spacemacs-badge.svg)](http://spacemacs.org)
 
-# flashcards
+# Flashcards
+
+
+
+## Installation && Usage
+- clone this repo
+- navigate into folder
+- run `lein run`
+- enjoy
 
 ## Play with custom flashcards
 - navigate to `resources`
@@ -10,14 +18,6 @@
   - change `line 7` filename to match the file you created
   - et voila
   - in terminal do `lein run`
-
-## Installation && Usage
-- clone this repo
-- navigate into folder
-- run `lein run`
-- enjoy
-
-
 
 
 ## License
