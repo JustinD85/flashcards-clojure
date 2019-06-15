@@ -25,8 +25,8 @@
      :cards-in-category  (fn [word]
                            (filter #(= (:category %) word) @cards))}))
 
-(defn round [deck-with-cards]
-  (let [turns (atom []) deck deck-with-cards
+(defn round [deck]
+  (let [turns (atom []) deck deck
         number-correct (fn [] (count (filter #(:correct? %) @turns)))
         number-correct-by-category (fn [category]
                                      (count
