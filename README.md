@@ -2,10 +2,22 @@
 
 # flashcards
 
+## Play with custom flashcards
+- navigate to `resources`
+- create a new csv in the format of:
+  - `question,answer,category`
+- navigate to runner file
+  - change `line 7` filename to match the file you created
+  - et voila
+  - in terminal do `lein run`
 
-## Usage
+## Installation && Usage
+- clone this repo
+- navigate into folder
+- run `lein run`
+- enjoy
 
-    $ java -jar flashcards-0.1.0-standalone.jar [args]
+
 
 
 ## License
