@@ -48,4 +48,4 @@
      :percent-correct (fn [] (/ (* 100 (float (number-correct)))  (count @turns)))
      :percent-correct-by-category (fn [category]
                                     (/ (* 100 (float (number-correct-by-category category)))
-                                       (count (filter #((:in-category? %) :facts) @turns))))}))
+                                       (count (filter #((:in-category? %) category) @turns))))}))
