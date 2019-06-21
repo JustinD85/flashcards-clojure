@@ -8,14 +8,14 @@
 (def raw-data (slurp flashcard-data-file))
 
 ;;helper functions
-(defn parse-data [data] (map #(s/split % #",") (s/split data #"\n")))
+(defn- parse-data [data] (map #(s/split % #",") (s/split data #"\n")))
 (def create-card (partial apply card))
 (def card-number (comp inc count #(%) #(:turns %)))
 (def get-question (comp :question #(%) #(:current-card %)))
 (def get-input (comp s/trim read-line))
 (def take-turn (comp :feedback #(% (get-input)) #(:take-turn %)))
 (def categories (set (map #(last %) (parse-data raw-data))))
-(defn correct-by-category [trailing-chars function]
+(defn- correct-by-category [trailing-chars function]
   (apply str (map #(str "\n" (function %) trailing-chars %) categories)))
 
 ;;converts to vector of cards
