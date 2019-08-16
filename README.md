@@ -11,10 +11,10 @@
 - enjoy
 
 ## Play with custom flashcards
-- navigate to `flashcards-clojure/src/flashcards/runner.clj`
+- navigate to `resources`
 - create a new csv in the format of:
   - `question,answer,category`
-- navigate to runner file
+- navigate to runner file `flashcards-clojure/src/flashcards/runner.clj`
   - change `line 7` filename to match the file you created
   - et voila
   - in terminal do `lein run`
