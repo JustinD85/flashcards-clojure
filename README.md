@@ -11,7 +11,7 @@
 - enjoy
 
 ## Play with custom flashcards
-- navigate to `resources`
+- navigate to `flashcards-clojure/src/flashcards/runner.clj`
 - create a new csv in the format of:
   - `question,answer,category`
 - navigate to runner file
